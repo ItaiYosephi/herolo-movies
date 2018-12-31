@@ -8,7 +8,6 @@ import * as MoviesActions from './movies.actions';
 import { Movie } from '../movie.model';
 import { IMDB_MOVIES_IDS } from '../movies-to-fetch';
 
-
 let nextId = 0;
 @Injectable()
 export class MoviesEffects {

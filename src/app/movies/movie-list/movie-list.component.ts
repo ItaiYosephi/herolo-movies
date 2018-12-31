@@ -6,7 +6,6 @@ import * as fromApp from '../../store/app.reducer';
 import * as fromMovies from '../store/movies.reducer';
 import * as MoviesActions from '../store/movies.actions';
 
-
 @Component({
   selector: 'app-movie-list',
   templateUrl: './movie-list.component.html',
@@ -15,9 +14,7 @@ import * as MoviesActions from '../store/movies.actions';
 export class MovieListComponent implements OnInit {
   moviesState: Observable<fromMovies.State>;
 
-  constructor(
-    private store: Store<fromApp.AppState>
-  ) {}
+  constructor(private store: Store<fromApp.AppState>) {}
 
   ngOnInit() {
     this.store.dispatch(new MoviesActions.FetchMovies());

@@ -4,7 +4,6 @@ import {
   OnDestroy,
   Output,
   EventEmitter,
-  Input
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 

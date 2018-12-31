@@ -27,7 +27,7 @@ export function MoviesReducer(
       return {
         ...state,
         movies: [movie, ...state.movies],
-        editedMovie : null
+        editedMovie: null
       };
     }
     case MoviesActions.START_EDIT_MOVIE: {
