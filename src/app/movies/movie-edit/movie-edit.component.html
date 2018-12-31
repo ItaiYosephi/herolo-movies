@@ -1,0 +1,85 @@
+<div class="content" (click)="$event.stopPropagation()">
+  <h2>{{ editMode ? 'Edit' : 'Add' }} Movie</h2>
+  <form [formGroup]="movieForm" (ngSubmit)="onSubmit()">
+    <div class="form-group-container">
+      <div class="form-group">
+        <label for="title">Title:</label>
+        <input
+          type="text"
+          formControlName="Title"
+          id="title"
+          class="form-control"
+        />
+        <div *ngIf="required('Title')" class="error">Title is required!</div>
+        <div *ngIf="forbiddenTitle" class="error">Title already exists!</div>
+      </div>
+      <div class="form-group">
+        <label for="director">Director:</label>
+        <input
+          type="text"
+          formControlName="Director"
+          id="director"
+          class="form-control"
+        />
+        <div *ngIf="required('Director')" class="error">
+          Director is required!
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="runtime">Runtime:</label>
+        <input
+          type="text"
+          formControlName="Runtime"
+          id="runtime"
+          class="form-control"
+        />
+        <div *ngIf="required('Runtime')" class="error">
+          Runtime is required!
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="year">Year:</label>
+        <input
+          type="number"
+          formControlName="Year"
+          id="year"
+          class="form-control"
+        />
+        <div *ngIf="required('Year')" class="error">Year is required!</div>
+        <div *ngIf="invalidYear" class="error">
+          Please enter a valid year: (yyyy)
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="genre">Genre:</label>
+        <input
+          type="text"
+          formControlName="Genre"
+          id="genre"
+          class="form-control"
+        />
+        <div *ngIf="required('Year')" class="error">Year is required!</div>
+      </div>
+      <div class="form-group">
+        <label for="imageUrl">Image Url:</label>
+        <input
+          #imgPath
+          type="text"
+          formControlName="ImageUrl"
+          id="imageUrl"
+          class="form-control"
+        />
+        <div *ngIf="required('ImageUrl')" class="error">
+          Image Url is required!
+        </div>
+      </div>
+    </div>
+    <div class="form-img"><img [src]="imgPath.value" alt="" /></div>
+    <div class="form-buttons">
+      <button type="submit" class="btn btn-primary">Save</button>
+      <button type="button" class="btn btn-primary" (click)="onClose()">
+        Cancle
+      </button>
+    </div>
+  </form>
+</div>

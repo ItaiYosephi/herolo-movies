@@ -1,0 +1,7 @@
+<div class="container">
+  <ul class="row">
+    <li *ngFor="let movie of (moviesState | async).movies" class="col">
+      <app-movie-list-item [movie]="movie"></app-movie-list-item>
+    </li>
+  </ul>
+</div>

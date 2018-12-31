@@ -1,0 +1,54 @@
+.layout {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  overflow-y: auto;
+  width: 90%;
+  max-height: 90%;
+  padding: 1.5rem;
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.5);
+  /* box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.5); */
+
+
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+}
+.form-group-container {
+  width: 60%;
+}
+.form-img {
+  width: 40%;
+  position: relative;
+}
+.form-img img {
+  /* width: 80%; */
+  max-width: 90%;
+  height: auto;
+  max-height: 90%;
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%)
+}
+
+.form-buttons {
+  width: 100%;
+}
+ .error {
+   color: red
+ }
