@@ -23,7 +23,6 @@ import { MoviesModule } from './movies/movies.module';
     BrowserAnimationsModule,
     MoviesModule
   ],
-  // entryComponents: [MovieEditComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
