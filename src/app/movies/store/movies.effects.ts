@@ -14,16 +14,14 @@ export class MoviesEffects {
     ofType(MoviesActions.FETCH_MOVIES),
     switchMap(() =>
       this.moviesService.fetchMovies().pipe(
-        map((movies: Movie[]) => {
-          return {
-            type: MoviesActions.MOVIES_FETCHED_SUCCESS,
-            payload: movies
-          };
-        }),
+        map((movies: Movie[]) => ({
+          type: MoviesActions.MOVIES_FETCHED_SUCCESS,
+          payload: movies
+        })),
         catchError(error => {
           return of({
             type: MoviesActions.MOVIES_FETCHED_FAILED,
-            payload: { error }
+            payload: error
           });
         })
       )

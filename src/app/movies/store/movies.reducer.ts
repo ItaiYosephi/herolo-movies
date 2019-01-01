@@ -15,7 +15,7 @@ export function MoviesReducer(
   action: MoviesActions.MoviesActions
 ) {
   switch (action.type) {
-    case MoviesActions.MOVIES_FETCHED: {
+    case MoviesActions.MOVIES_FETCHED_SUCCESS: {
       return {
         ...state,
         movies: [...action.payload]
