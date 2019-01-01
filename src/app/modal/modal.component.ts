@@ -57,14 +57,12 @@ export class ModalComponent implements OnInit, AfterContentInit {
   }
   loadComponent() {
     const cmp = this.modalService.childComponent;
-    const data = this.modalService.childComponentData;
     const componentFactory = this.resolver.resolveComponentFactory(cmp);
 
     const viewContainerRef = this.entry.viewContainerRef;
     viewContainerRef.clear();
 
     this.component = viewContainerRef.createComponent(componentFactory);
-    this.component.instance.data = data;
     this.closeSubscription = this.component.instance.close.subscribe(event => {
       console.log(event);
       this.destroyComponent();

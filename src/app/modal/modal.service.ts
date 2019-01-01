@@ -11,9 +11,8 @@ export class ModalService {
   childComponentData;
 
   constructor() {}
-  open(cmp, data) {
+  open(cmp) {
     this.childComponent = cmp;
-    this.childComponentData = data;
     this.openModalSubject.next();
   }
 

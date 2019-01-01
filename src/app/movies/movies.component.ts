@@ -31,7 +31,7 @@ export class MoviesComponent implements OnInit, OnDestroy {
   ngOnDestroy() {}
 
   onAddMovie() {
-    this.store.dispatch(new MoviesActions.StartEditMovie(new Movie()));
-    this.modalSerivce.open(MovieEditComponent, { movie: null });
+    this.store.dispatch(new MoviesActions.StartEditMovie(null));
+    this.modalSerivce.open(MovieEditComponent);
   }
 }

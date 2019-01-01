@@ -3,7 +3,7 @@ import {
   OnInit,
   OnDestroy,
   Output,
-  EventEmitter,
+  EventEmitter
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 
@@ -33,13 +33,24 @@ export class MovieEditComponent implements OnInit, OnDestroy {
       .select('movies')
       .pipe(take(1))
       .subscribe((moviesState: fromMovies.State) => {
-        this.movie = {
-          ...moviesState.editedMovie
-        };
-        if (this.movie.Runtime) {
+        console.log(moviesState);
+        if (moviesState.editedMovie) {
+          this.movie = {
+            ...moviesState.editedMovie
+          };
+          this.editMode = true;
           this.movie.Runtime = parseInt(this.movie.Runtime, 10);
+        } else {
+          console.log('editing mode');
+          this.movie = {
+            Title: null,
+            Year: null,
+            Runtime: null,
+            Genre: null,
+            Director: null,
+            ImageUrl: null
+          };
         }
-        this.editMode = this.movie.id !== null;
         this.initForm();
       });
   }
@@ -69,7 +80,7 @@ export class MovieEditComponent implements OnInit, OnDestroy {
   onSubmit() {
     const movie = {
       ...this.movieForm.value,
-      Runtimnge: this.movieForm.value.Runtime + 'min'
+      Runtime: this.movieForm.value.Runtime + ' min'
     };
     if (this.editMode) {
       this.store.dispatch(
@@ -77,7 +88,7 @@ export class MovieEditComponent implements OnInit, OnDestroy {
       );
     } else {
       this.store.dispatch(
-        new MoviesActions.AddMovie({ ...this.movieForm.value, id: null })
+        new MoviesActions.AddMovie({ ...movie, id: Date.now() })
       );
     }
     this.close.emit();
@@ -117,8 +128,8 @@ export class MovieEditComponent implements OnInit, OnDestroy {
   get forbiddenTitle() {
     return (
       this.movieForm.get('Title').errors &&
-      this.movieForm.get('Title').errors.titleIsForbidden
-       && this.movieForm.get('Title').touched
+      this.movieForm.get('Title').errors.titleIsForbidden &&
+      this.movieForm.get('Title').touched
     );
   }
   get invalidYear() {
@@ -133,5 +144,4 @@ export class MovieEditComponent implements OnInit, OnDestroy {
   get Year() {
     return this.movieForm.get('Year');
   }
-
 }

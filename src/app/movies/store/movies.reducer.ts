@@ -10,7 +10,6 @@ const initialState: State = {
   movies: [],
   editedMovie: null
 };
-let nextId = 100;
 export function MoviesReducer(
   state = initialState,
   action: MoviesActions.MoviesActions
@@ -23,17 +22,16 @@ export function MoviesReducer(
       };
     }
     case MoviesActions.ADD_MOVIE: {
-      const movie = { ...action.payload, id: nextId++ };
       return {
         ...state,
-        movies: [movie, ...state.movies],
+        movies: [action.payload, ...state.movies],
         editedMovie: null
       };
     }
     case MoviesActions.START_EDIT_MOVIE: {
       return {
         ...state,
-        editedMovie: { ...action.payload }
+        editedMovie: action.payload ? { ...action.payload } : null
       };
     }
     case MoviesActions.STOP_EDIT_MOVIE: {

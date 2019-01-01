@@ -24,7 +24,7 @@ export class MovieListItemComponent implements OnInit {
 
   onEdit() {
     this.store.dispatch(new MoviesActions.StartEditMovie(this.movie));
-    this.modalService.open(MovieEditComponent, { movie: this.movie });
+    this.modalService.open(MovieEditComponent);
   }
   onDelete() {
     this.store.dispatch(new MoviesActions.DeleteMovie(this.movie.id));

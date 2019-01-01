@@ -8,7 +8,6 @@ import * as MoviesActions from './movies.actions';
 import { Movie } from '../movie.model';
 import { IMDB_MOVIES_IDS } from '../movies-to-fetch';
 
-let nextId = 0;
 @Injectable()
 export class MoviesEffects {
   @Effect()
@@ -30,16 +29,17 @@ export class MoviesEffects {
           map(responses => {
             const { Title, Year, Runtime, Genre, Director } = responses[0];
             const posterPath = responses[1].movie_results[0].poster_path;
-            const ImgUrl = 'https://image.tmdb.org/t/p/w500' + posterPath;
-            const movie = new Movie(
-              nextId++,
+            const ImageUrl = 'https://image.tmdb.org/t/p/w500' + posterPath;
+            const movie: Movie = {
+              id: Date.now(),
               Title,
               Year,
               Runtime,
               Genre,
               Director,
-              ImgUrl
-            );
+              ImageUrl
+            };
+
             return movie;
           })
         );
