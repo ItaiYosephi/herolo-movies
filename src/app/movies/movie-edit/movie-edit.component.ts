@@ -6,14 +6,14 @@ import {
   EventEmitter
 } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { take, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { MoviesService } from '../movies.service';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import * as MoviesActions from '../store/movies.actions';
 import * as fromApp from '../../store/app.reducer';
 import * as fromMovies from '../../movies/store/movies.reducer';
-
-import { take, map, tap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-movie-edit',
@@ -26,7 +26,10 @@ export class MovieEditComponent implements OnInit, OnDestroy {
   editMode = false;
   movieForm: FormGroup;
 
-  constructor(private store: Store<fromApp.AppState>) {}
+  constructor(
+    private store: Store<fromApp.AppState>,
+    private moviesService: MoviesService
+  ) {}
 
   ngOnInit() {
     this.store
@@ -41,23 +44,12 @@ export class MovieEditComponent implements OnInit, OnDestroy {
           this.editMode = true;
           this.movie.Runtime = parseInt(this.movie.Runtime, 10);
         } else {
-          console.log('editing mode');
-          this.movie = {
-            Title: null,
-            Year: null,
-            Runtime: null,
-            Genre: null,
-            Director: null,
-            ImageUrl: null
-          };
+          this.movie = this.moviesService.getEmptyMovie();
         }
         this.initForm();
       });
   }
 
-  ngOnDestroy() {
-    this.store.dispatch(new MoviesActions.StopEditMovie());
-  }
   initForm() {
     this.movieForm = new FormGroup({
       Title: new FormControl(
@@ -97,6 +89,7 @@ export class MovieEditComponent implements OnInit, OnDestroy {
   onClose() {
     this.close.emit();
   }
+
   forbiddenTitleValidator(
     control: FormControl
   ): Promise<any> | Observable<any> {
@@ -115,6 +108,10 @@ export class MovieEditComponent implements OnInit, OnDestroy {
         }
       })
     );
+  }
+
+  ngOnDestroy() {
+    this.store.dispatch(new MoviesActions.StopEditMovie());
   }
 
   required(name: string) {
@@ -139,9 +136,5 @@ export class MovieEditComponent implements OnInit, OnDestroy {
       (this.movieForm.get('Year').errors.min ||
         this.movieForm.get('Year').errors.max)
     );
-  }
-
-  get Year() {
-    return this.movieForm.get('Year');
   }
 }

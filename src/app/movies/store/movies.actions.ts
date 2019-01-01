@@ -2,7 +2,8 @@ import { Action } from '@ngrx/store';
 import { Movie } from '../movie.model';
 
 export const FETCH_MOVIES = 'FETCH_MOVIES';
-export const MOVIES_FETCHED = 'MOVIES_FETCHED';
+export const MOVIES_FETCHED_SUCCESS = 'MOVIES_FETCHED_SUCCESS';
+export const MOVIES_FETCHED_FAILED = 'MOVIES_FETCHED_FAILED';
 export const ADD_MOVIE = 'ADD_MOVIE';
 export const START_EDIT_MOVIE = 'START_EDIT_MOVIE';
 export const STOP_EDIT_MOVIE = 'STOP_EDIT_MOVIE';
@@ -13,10 +14,16 @@ export class FetchMovies implements Action {
   readonly type = FETCH_MOVIES;
 }
 
-export class MoviesFetched implements Action {
-  readonly type = MOVIES_FETCHED;
+export class MoviesFetchedSuccess implements Action {
+  readonly type = MOVIES_FETCHED_SUCCESS;
 
   constructor(public payload: Movie[]) {}
+}
+
+export class MoviesFetchedFailed implements Action {
+  readonly type = MOVIES_FETCHED_FAILED;
+
+  constructor(public payload: any) {}
 }
 
 export class AddMovie implements Action {
@@ -54,4 +61,5 @@ export type MoviesActions =
   | StopEditMovie
   | DeleteMovie
   | FetchMovies
-  | MoviesFetched;
+  | MoviesFetchedSuccess
+  | MoviesFetchedFailed;
