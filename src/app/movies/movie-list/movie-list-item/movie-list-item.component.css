@@ -16,7 +16,7 @@ h3 {
 }
 
 .card-content {
-  padding: 7px;
+  padding: 10px;
 }
 
 .genre {
@@ -57,8 +57,8 @@ h3 {
 
 .card-buttons {
   position: absolute;
-  bottom: 5px;
-  left: 5px;
+  bottom: 10px;
+  left: 10px;
 }
 button {
   margin-right: 5px;
