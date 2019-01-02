@@ -42,7 +42,7 @@ form {
 }
 .form-img img {
   max-width: 90%;
-  height: 100%;
+  height: auto;
   max-height: 94%;
   position: absolute;
   top: 30px;
