@@ -25,3 +25,7 @@ section {
   line-height: 50px;
   z-index: 3;
 }
+
+.btn-add:focus {
+  outline: 0;
+}

@@ -19,7 +19,11 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": ["src/favicon.png", "src/assets"],
-            "styles": ["src/assets/css/reset.css", "src/styles.css"],
+            "styles": [
+              "src/css/fonts.css",
+              "src/css/reset.css",
+              "src/css/styles.css"
+            ],
             "scripts": []
           },
           "configurations": {
