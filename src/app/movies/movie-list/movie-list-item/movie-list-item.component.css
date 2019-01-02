@@ -22,6 +22,7 @@ h3 {
 .genre {
   margin-left: auto;
   color: grey;
+  text-align: right;
 }
 
 .card-img-container {
