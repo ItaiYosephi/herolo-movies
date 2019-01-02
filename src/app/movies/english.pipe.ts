@@ -5,6 +5,10 @@ import { PipeTransform, Pipe } from '@angular/core';
 })
 export class EnglishPipe implements PipeTransform {
   transform(value: any) {
-    return value.replace(/[^\w\s]/gi, '');
+    if (value) {
+      return value.replace(/[^\w\s]/gi, '');
+    } else {
+      return '';
+    }
   }
 }

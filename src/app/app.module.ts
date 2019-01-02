@@ -21,7 +21,7 @@ import { MoviesModule } from './movies/movies.module';
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([MoviesEffects]),
     BrowserAnimationsModule,
-    MoviesModule
+    MoviesModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -8,12 +8,13 @@ import {
 import { Store } from '@ngrx/store';
 import { take, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { MoviesService } from '../movies.service';
-
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import * as MoviesActions from '../store/movies.actions';
+
+import { MoviesService } from '../movies.service';
+import { Movie } from '../movie.model';
 import * as fromApp from '../../store/app.reducer';
 import * as fromMovies from '../../movies/store/movies.reducer';
+import * as MoviesActions from '../store/movies.actions';
 
 @Component({
   selector: 'app-movie-edit',
@@ -22,9 +23,10 @@ import * as fromMovies from '../../movies/store/movies.reducer';
 })
 export class MovieEditComponent implements OnInit, OnDestroy {
   @Output() close = new EventEmitter<any>();
+  movieForm: FormGroup;
   movie;
   editMode = false;
-  movieForm: FormGroup;
+  editedMovieId: number = null;
 
   constructor(
     private store: Store<fromApp.AppState>,
@@ -38,6 +40,7 @@ export class MovieEditComponent implements OnInit, OnDestroy {
       .subscribe((moviesState: fromMovies.State) => {
         console.log(moviesState);
         if (moviesState.editedMovie) {
+          this.editedMovieId = moviesState.editedMovie.id;
           this.movie = {
             ...moviesState.editedMovie
           };
@@ -49,7 +52,9 @@ export class MovieEditComponent implements OnInit, OnDestroy {
         this.initForm();
       });
   }
-
+  onError() {
+    console.log('error222');
+  }
   initForm() {
     this.movieForm = new FormGroup({
       Title: new FormControl(
@@ -95,16 +100,22 @@ export class MovieEditComponent implements OnInit, OnDestroy {
   ): Promise<any> | Observable<any> {
     return this.store.select('movies').pipe(
       take(1),
-      map((moviesState: fromMovies.State) => {
-        const existingMovie = moviesState.movies.find(movie => {
-          return movie.Title.toLowerCase() === control.value.toLowerCase();
-        });
-        if (existingMovie && existingMovie.id !== moviesState.editedMovie.id) {
+      map((moviesState: fromMovies.State) =>
+        moviesState.movies.find(
+          movie =>
+            movie.Title.toLowerCase() === control.value.toLowerCase().trim()
+        )
+      ),
+      map((existingMovie: Movie) => {
+        if (
+          !existingMovie ||
+          (existingMovie && existingMovie.id === this.editedMovieId)
+        ) {
+          return null;
+        } else {
           return {
             titleIsForbidden: true
           };
-        } else {
-          return null;
         }
       })
     );

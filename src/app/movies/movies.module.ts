@@ -8,6 +8,7 @@ import { MovieListItemComponent } from './movie-list/movie-list-item/movie-list-
 import { MovieEditComponent } from './movie-edit/movie-edit.component';
 import { EnglishPipe } from './english.pipe';
 import { MovieDeleteConfirmComponent } from './movie-delete-confirm/movie-delete-confirm.component';
+import { DefaultImageDirective } from '../default-image.directive';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { MovieDeleteConfirmComponent } from './movie-delete-confirm/movie-delete
     MovieListItemComponent,
     MovieEditComponent,
     EnglishPipe,
-    MovieDeleteConfirmComponent
+    MovieDeleteConfirmComponent,
+    DefaultImageDirective
   ],
   entryComponents: [MovieEditComponent],
   imports: [CommonModule, ReactiveFormsModule],
