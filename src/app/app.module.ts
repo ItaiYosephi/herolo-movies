@@ -6,23 +6,22 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { ModalComponent } from './modal/modal.component';
-import { ModalDirective } from './modal/modal.directive';
 import { reducers } from './store/app.reducer';
 import { MoviesEffects } from './movies/store/movies.effects';
 import { MoviesModule } from './movies/movies.module';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, ModalComponent, ModalDirective],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
-    HttpClientModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([MoviesEffects]),
     BrowserAnimationsModule,
     MoviesModule,
+    CoreModule
   ],
+  exports: [CoreModule],
   providers: [],
   bootstrap: [AppComponent]
 })

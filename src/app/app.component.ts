@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ModalService } from './modal/modal.service';
+import { ModalService } from './core/modal/modal.service';
 import { Subscription } from 'rxjs';
 
 @Component({

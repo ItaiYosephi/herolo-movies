@@ -1,0 +1,24 @@
+.movie-delete {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.5);
+}
+h3 {
+  font-size: 1.5rem;
+}
+
+.movie-delete > * {
+  padding: 10px 20px;
+}
+
+.movie-delete > *:not(:last-child) {
+  border-bottom: 1px solid #eee;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+.buttons > * {
+  margin-left: 5px;
+}

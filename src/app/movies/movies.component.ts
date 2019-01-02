@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { ModalService } from '../modal/modal.service';
+import { ModalService } from '../core/modal/modal.service';
 import { MovieEditComponent } from './movie-edit/movie-edit.component';
 import { Movie } from './movie.model';
 import * as MoviesActions from './store/movies.actions';

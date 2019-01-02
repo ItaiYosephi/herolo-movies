@@ -1,5 +1,7 @@
 <div class="content" (click)="$event.stopPropagation()">
-  <h2>{{ editMode ? 'Edit' : 'Add' }} Movie</h2>
+  <div class="header">
+    <h3>{{ editMode ? 'Edit' : 'Add' }} Movie</h3>
+  </div>
   <form [formGroup]="movieForm" (ngSubmit)="onSubmit()">
     <div class="form-group-container">
       <div class="form-group">
@@ -62,6 +64,7 @@
       </div>
       <div class="form-group">
         <label for="imageUrl">Image Url:</label>
+        <span (click)="toggleImage()" class="toggle-image">Show Image</span>
         <input
           #imgPath
           type="text"
@@ -74,10 +77,27 @@
         </div>
       </div>
     </div>
-    <div class="form-img"><img [src]="imgPath.value" appImage default="/assets/images/film-poster-placeholder.png" alt="" /></div>
+    <div
+      class="form-img"
+      [ngClass]="{ show: showImage }"
+      (click)="toggleImage()"
+    >
+      <img
+        [src]="imgPath.value"
+        appImage
+        default="/assets/images/film-poster-placeholder.png"
+        alt=""
+      />
+    </div>
     <div class="form-buttons">
-      <button type="submit" class="btn btn-primary">Save</button>
-      <button type="button" class="btn btn-primary" (click)="onClose()">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="movieForm.invalid"
+      >
+        Save
+      </button>
+      <button type="button" class="btn btn-danger" (click)="onClose()">
         Cancle
       </button>
     </div>

@@ -8,6 +8,8 @@ export const ADD_MOVIE = 'ADD_MOVIE';
 export const START_EDIT_MOVIE = 'START_EDIT_MOVIE';
 export const STOP_EDIT_MOVIE = 'STOP_EDIT_MOVIE';
 export const UPDATE_MOVIE = 'UPDATE_MOVIE';
+export const CONFIRM_DELETE_MOVIE = 'CONFIRM_DELETE_MOVIE';
+export const CANCLE_MOVIE_DELETE = 'CANCLE_MOVIE_DELETE';
 export const DELETE_MOVIE = 'DELETE_MOVIE';
 
 export class FetchMovies implements Action {
@@ -48,10 +50,18 @@ export class UpdateMovie implements Action {
   constructor(public payload: Movie) {}
 }
 
-export class DeleteMovie implements Action {
-  readonly type = DELETE_MOVIE;
+export class ConfirmDeleteMovie implements Action {
+  readonly type = CONFIRM_DELETE_MOVIE;
 
   constructor(public payload: number) {}
+}
+
+export class CancleDeleteMovie implements Action {
+  readonly type = CANCLE_MOVIE_DELETE;
+}
+
+export class DeleteMovie implements Action {
+  readonly type = DELETE_MOVIE;
 }
 
 export type MoviesActions =
@@ -59,6 +69,8 @@ export type MoviesActions =
   | UpdateMovie
   | StartEditMovie
   | StopEditMovie
+  | ConfirmDeleteMovie
+  | CancleDeleteMovie
   | DeleteMovie
   | FetchMovies
   | MoviesFetchedSuccess

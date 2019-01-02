@@ -27,7 +27,7 @@ export class MovieEditComponent implements OnInit, OnDestroy {
   movie;
   editMode = false;
   editedMovieId: number = null;
-
+  showImage = false;
   constructor(
     private store: Store<fromApp.AppState>,
     private moviesService: MoviesService
@@ -38,7 +38,6 @@ export class MovieEditComponent implements OnInit, OnDestroy {
       .select('movies')
       .pipe(take(1))
       .subscribe((moviesState: fromMovies.State) => {
-        console.log(moviesState);
         if (moviesState.editedMovie) {
           this.editedMovieId = moviesState.editedMovie.id;
           this.movie = {
@@ -52,9 +51,7 @@ export class MovieEditComponent implements OnInit, OnDestroy {
         this.initForm();
       });
   }
-  onError() {
-    console.log('error222');
-  }
+
   initForm() {
     this.movieForm = new FormGroup({
       Title: new FormControl(
@@ -119,6 +116,9 @@ export class MovieEditComponent implements OnInit, OnDestroy {
         }
       })
     );
+  }
+  toggleImage() {
+    this.showImage = !this.showImage;
   }
 
   ngOnDestroy() {

@@ -12,9 +12,7 @@ import {
   style,
   transition,
   animate,
-  keyframes
 } from '@angular/animations';
-
 
 import { ModalService } from './modal.service';
 import { ModalDirective } from './modal.directive';
@@ -29,10 +27,7 @@ import { Subscription } from 'rxjs';
       transition('void => *', [
         style({ transform: 'scale3d(.3, .3, .3)' }),
         animate(300)
-      ]),
-      // transition('* => void', [
-      //   animate(100000, style({ transform: 'scale3d(.0, .0, .0)' }))
-      // ])
+      ])
     ])
   ]
 })
@@ -64,33 +59,12 @@ export class ModalComponent implements OnInit, AfterContentInit {
 
     this.component = viewContainerRef.createComponent(componentFactory);
     this.closeSubscription = this.component.instance.close.subscribe(event => {
-      console.log(event);
       this.destroyComponent();
     });
-
-    // (<AdComponent>componentRef.instance).data = adItem.data;
-    // console.log('tiis. enloading');
-    // const authFormFactory = this.resolver.resolveComponentFactory(cmp);
-    // this.component = this.entry.createComponent(authFormFactory);
-
-    // if (this.component.instance.accept) {
-    //   this.component.instance.accept.subscribe(event => {
-    //     console.log(event);
-    //     this.destroyComponent();
-    //   });
-    // }
-    // if (this.component.instance.decline) {
-    //   this.component.instance.decline.subscribe(event => {
-    //     console.log(event);
-    //     this.destroyComponent();
-    //   });
-    // }
   }
 
   destroyComponent() {
-    console.log('distoyy');
     this.renderer.removeClass(document.body, 'no-scroll');
-
     this.closeSubscription.unsubscribe();
     this.component.destroy();
     this.modalService.close();

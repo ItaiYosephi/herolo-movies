@@ -5,10 +5,12 @@ import { Movie } from './../movie.model';
 export interface State {
   movies: Movie[];
   editedMovie: Movie;
+  movieToDeleteId: number;
 }
 const initialState: State = {
   movies: [],
-  editedMovie: null
+  editedMovie: null,
+  movieToDeleteId: null
 };
 export function MoviesReducer(
   state = initialState,
@@ -50,9 +52,21 @@ export function MoviesReducer(
         editedMovie: null
       };
     }
+    case MoviesActions.CONFIRM_DELETE_MOVIE: {
+      return {
+        ...state,
+        movieToDeleteId: action.payload
+      };
+    }
+    case MoviesActions.CANCLE_MOVIE_DELETE: {
+      return {
+        ...state,
+        movieToDeleteId: null
+      };
+    }
     case MoviesActions.DELETE_MOVIE: {
       const movies = [...state.movies];
-      const idx = movies.findIndex(movie => movie.id === action.payload);
+      const idx = movies.findIndex(movie => movie.id === state.movieToDeleteId);
       movies.splice(idx, 1);
       return {
         ...state,
