@@ -7,7 +7,7 @@
   overflow-y: auto;
   width: 90%;
   max-width: 900px;
-  max-height: 90%;
+  max-height: 100%;
   box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
 }
@@ -54,8 +54,8 @@ form {
   display: flex;
   justify-content: flex-end;
 }
-.form-buttons > *{
-margin-left: 5px;
+.form-buttons > * {
+  margin-left: 5px;
 }
 .error {
   color: red;
